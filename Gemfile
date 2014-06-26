@@ -10,15 +10,16 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
-gem 'spring',        group: :development
+gem 'spring',        group: :development #spring creates these bin folder, and allow scripts to run faster
 
 group :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner'
-  gem 'timecop' # freeze time. 
+  gem 'timecop' # freeze time.
 end
 
 group :development, :test do
+  gem 'spring-commands-rspec'
   gem 'ffaker'
   gem 'rspec-rails'
   gem 'pry-rails'
