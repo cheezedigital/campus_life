@@ -14,7 +14,7 @@ RSpec.describe NotesController, :type => :controller do
       end
     end
 
-    describe '#show', :focus do
+    describe '#show' do
       before do
         @note = create(:note, text: 'my little note')
       end
@@ -27,11 +27,25 @@ RSpec.describe NotesController, :type => :controller do
     end
 
     describe '#new' do
-
+      it 'sets up a new note instance' do
+        get :new
+        expect(response).to be_success
+        expect(assigns(:note)).to be_new_record
+        expect(response).to render_template('new')
+      end
     end
 
-    describe '#create' do
-
+    describe '#create' do #don't render template coz we don't have a create.html.erb. ever.
+      context 'when saving a proper record', :focus do
+        it 'creates a new note and saves it to the db' do
+          expect { #optional arugment, or block and looks at reutrn value to equal something else. if you pass a block and by doing this action something should happen
+            post :create, note: {text: 'a new note'}
+          }.to change(Note, :count).by(1)
+        end
+      end
+      context 'when the record fails to save' do
+        
+      end
     end
 
     describe '#edit' do
